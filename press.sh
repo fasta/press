@@ -12,10 +12,12 @@ mkdir -p $DEST
 
 function template()
 {
+  TEMPLATE=$BASEDIR/default/$1.html
+
   OLD_IFS=$IFS
   IFS="
 "
-  for LINE in $(cat $BASEDIR/default/article.html)
+  for LINE in $(cat $TEMPLATE)
   do
     eval "echo \"${LINE}\""
   done
@@ -25,11 +27,30 @@ function template()
 
 for ARTICLE in $($REPO/articles.sh)
 do
+  function article_name()
+  {
+    echo $ARTICLE
+  }
   function article_body()
   {
     $REPO/article.sh $ARTICLE
   }
 
-  template > $DEST/$ARTICLE.html
+  template "article" > $DEST/$ARTICLE.html
 done
+
+
+function articles_list()
+{
+  for ARTICLE in $($REPO/articles.sh)
+  do
+    function article_name()
+    {
+      echo $ARTICLE
+    }
+
+    template "articles_item"
+  done
+}
+template "articles" > $DEST/index.html
 
