@@ -24,9 +24,8 @@ function template()
   IFS=$OLD_IFS
 }
 
-
-for ARTICLE in $($REPO/articles.sh)
-do
+function define_article()
+{
   function article_name()
   {
     echo $ARTICLE
@@ -35,6 +34,13 @@ do
   {
     $REPO/article.sh $ARTICLE
   }
+}
+
+
+
+for ARTICLE in $($REPO/articles.sh)
+do
+  define_article
 
   template "article" > $DEST/$ARTICLE.html
 done
@@ -44,10 +50,7 @@ function articles_list()
 {
   for ARTICLE in $($REPO/articles.sh)
   do
-    function article_name()
-    {
-      echo $ARTICLE
-    }
+    define_article
 
     template "articles_item"
   done
