@@ -30,9 +30,17 @@ function define_article()
   {
     echo $ARTICLE
   }
+  function article_author()
+  {
+    $REPO/article/author.sh $ARTICLE
+  }
+  function article_date()
+  {
+    $REPO/article/date.sh $ARTICLE
+  }
   function article_body()
   {
-    $REPO/article.sh $ARTICLE
+    $REPO/article/body.sh $ARTICLE
   }
 }
 
