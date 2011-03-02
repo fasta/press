@@ -33,12 +33,48 @@ function template()
   IFS=$OLD_IFS
 }
 
+function content()
+{
+  FILE=$1
+  shift
+
+  if [ -x "$FILE" ]; then
+    $FILE $@
+  else
+    cat $FILE
+  fi
+}
+
 
 # Content
 #
 function articles()
 {
-  $REPO/articles
+  content $REPO/articles
+}
+
+function def_paper()
+{
+  function paper_title()
+  {
+    content $REPO/title
+  }
+  function paper_updated()
+  {
+    ARTICLE=$(articles | tail -1)
+    content $REPO/article/updated $ARTICLE
+  }
+  function paper_url()
+  {
+    content $REPO/url
+  }
+  function paper_id()
+  {
+    HOST=$(paper_url | cut -d/ -f3)
+    DATE=$(paper_updated | cut -dT -f1)
+
+    echo "tag:$HOST,$DATE:/"
+  }
 }
 
 function def_article()
@@ -49,15 +85,15 @@ function def_article()
   }
   function article_author()
   {
-    $REPO/article/author $ARTICLE
+    content $REPO/article/author $ARTICLE
   }
-  function article_date()
+  function article_updated()
   {
-    $REPO/article/date $ARTICLE
+    content $REPO/article/updated $ARTICLE
   }
   function article_body()
   {
-    $REPO/article/body $ARTICLE
+    content $REPO/article/body $ARTICLE
   }
 }
 
@@ -114,6 +150,8 @@ done
 
 # generate index page
 if [ ! -z "$INDEX" ]; then
+  def_paper
+
   function index_entries()
   {
     articles_templated "index_entry.html"
@@ -123,6 +161,8 @@ fi
 
 # generate atom feed
 if [ ! -z "$FEED" ]; then
+  def_paper
+
   function feed_entries()
   {
     articles_templated "feed_entry.xml"

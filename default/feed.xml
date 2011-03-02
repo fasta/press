@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
 
 <feed xmlns='http://www.w3.org/2005/Atom'>
-  <title>Example Feed</title>
-  <id>tag:example.com,2011-03-01:/</id>
-  <updated>2011-03-01T22:46:08Z</updated>
-  <link rel='alternate' href='http://www.example.com' />
+  <title>$(paper_title)</title>
+  <id>$(paper_id)</id>
+  <updated>$(paper_updated)</updated>
+  <link rel='alternate' href='$(paper_url)' />
 
   $(feed_entries)
 </feed>
