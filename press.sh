@@ -13,6 +13,7 @@ mkdir -p $DEST
 function template()
 {
   TEMPLATE=$BASEDIR/default/$1.html
+  [ ! -e "$TEMPLATE" ] && TEMPLATE=$BASEDIR/default/$1.xml
 
   OLD_IFS=$IFS
   IFS="
@@ -65,3 +66,17 @@ function articles_list()
 }
 template "articles" > $DEST/index.html
 
+function feed_title()
+{
+  echo "Example Feed"
+}
+function feed_entries()
+{
+  for ARTICLE in $($REPO/articles.sh)
+  do
+    define_article
+
+    template "feed_entry"
+  done
+}
+template "feed" > $DEST/feed.xml
