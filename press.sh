@@ -33,6 +33,14 @@ function template()
   IFS=$OLD_IFS
 }
 
+
+# Content
+#
+function articles()
+{
+  $REPO/articles
+}
+
 function def_article()
 {
   function article_name()
@@ -51,6 +59,18 @@ function def_article()
   {
     $REPO/article/body $ARTICLE
   }
+}
+
+function articles_templated()
+{
+  TEMPL=$1
+
+  for ARTICLE in $(articles)
+  do
+    def_article
+
+    template $TEMPL
+  done
 }
 
 
@@ -94,31 +114,19 @@ done
 
 # generate index page
 if [ ! -z "$INDEX" ]; then
-  function articles_list()
+  function index_entries()
   {
-    for ARTICLE in $($REPO/articles)
-    do
-      def_article
-
-      template "index_entry.html"
-    done
+    articles_templated "index_entry.html"
   }
-
   template "index.html" > $DEST/index.html
 fi
 
 # generate atom feed
 if [ ! -z "$FEED" ]; then
-  function articles_list()
+  function feed_entries()
   {
-    for ARTICLE in $($REPO/articles)
-    do
-      def_article
-
-      template "feed_entry.xml"
-    done
+    articles_templated "feed_entry.xml"
   }
-
   template "feed.xml" > $DEST/feed.xml
 fi
 

@@ -6,6 +6,6 @@
   <updated>2011-03-01T22:46:08Z</updated>
   <link rel='alternate' href='http://www.example.com' />
 
-  $(articles_list)
+  $(feed_entries)
 </feed>
 
