@@ -33,21 +33,21 @@ function define_article()
   }
   function article_author()
   {
-    $REPO/article/author.sh $ARTICLE
+    $REPO/article/author $ARTICLE
   }
   function article_date()
   {
-    $REPO/article/date.sh $ARTICLE
+    $REPO/article/date $ARTICLE
   }
   function article_body()
   {
-    $REPO/article/body.sh $ARTICLE
+    $REPO/article/body $ARTICLE
   }
 }
 
 
 
-for ARTICLE in $($REPO/articles.sh)
+for ARTICLE in $($REPO/articles)
 do
   define_article
 
@@ -57,7 +57,7 @@ done
 
 function articles_list()
 {
-  for ARTICLE in $($REPO/articles.sh)
+  for ARTICLE in $($REPO/articles)
   do
     define_article
 
@@ -72,7 +72,7 @@ function feed_title()
 }
 function feed_entries()
 {
-  for ARTICLE in $($REPO/articles.sh)
+  for ARTICLE in $($REPO/articles)
   do
     define_article
 
