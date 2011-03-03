@@ -1,6 +1,6 @@
 <entry>
   <title>$(article_name)</title>
-  <id>tag:example.com,2011-03-01:entry</id>
+  <id>$(article_id)</id>
   <updated>$(article_updated)</updated>
   <author>
     <name>$(article_author)</name>

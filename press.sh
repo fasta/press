@@ -95,6 +95,13 @@ function def_article()
   {
     content $REPO/article/body $ARTICLE
   }
+  function article_id()
+  {
+    HOST=$(content $REPO/url | cut -d/ -f3)
+    DATE=$(article_updated | cut -dT -f1)
+
+    echo "tag:$HOST,$DATE:/$ARTICLE"
+  }
 }
 
 function articles_templated()
