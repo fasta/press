@@ -1,13 +1,13 @@
 <entry>
-  <title>$(article_name)</title>
-  <id>$(article_id)</id>
-  <updated>$(article_updated)</updated>
+  <title>$(entry_name)</title>
+  <id>$(entry_id)</id>
+  <updated>$(entry_updated)</updated>
   <author>
-    <name>$(article_author)</name>
+    <name>$(entry_author)</name>
   </author>
   <content type='xhtml'>
     <div xmlns='http://www.w3.org/1999/xhtml'>
-      $(article_body)
+      $(entry_content)
     </div>
   </content>
 </entry>

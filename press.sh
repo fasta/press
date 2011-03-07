@@ -48,69 +48,69 @@ function content()
 
 # Content
 #
-function articles()
+function entries()
 {
-  content $REPO/articles
+  content $REPO/entries
 }
 
-function def_paper()
+function def_feed()
 {
-  function paper_title()
+  function feed_title()
   {
     content $REPO/title
   }
-  function paper_updated()
+  function feed_updated()
   {
-    ARTICLE=$(articles | tail -1)
-    content $REPO/article/updated $ARTICLE
+    ENTRY=$(entries | tail -1)
+    content $REPO/entry/updated $ENTRY
   }
-  function paper_url()
+  function feed_url()
   {
     content $REPO/url
   }
-  function paper_id()
+  function feed_id()
   {
-    HOST=$(paper_url | cut -d/ -f3)
-    DATE=$(paper_updated | cut -dT -f1)
+    HOST=$(feed_url | cut -d/ -f3)
+    DATE=$(feed_updated | cut -dT -f1)
 
     echo "tag:$HOST,$DATE:/"
   }
 }
 
-function def_article()
+function def_entry()
 {
-  function article_name()
+  function entry_name()
   {
-    echo $ARTICLE
+    echo $ENTRY
   }
-  function article_author()
+  function entry_author()
   {
-    content $REPO/article/author $ARTICLE
+    content $REPO/entry/author $ENTRY
   }
-  function article_updated()
+  function entry_updated()
   {
-    content $REPO/article/updated $ARTICLE
+    content $REPO/entry/updated $ENTRY
   }
-  function article_body()
+  function entry_content()
   {
-    content $REPO/article/body $ARTICLE
+    content $REPO/entry/content $ENTRY
   }
-  function article_id()
+  function entry_id()
   {
     HOST=$(content $REPO/url | cut -d/ -f3)
-    DATE=$(article_updated | cut -dT -f1)
+    DATE=$(entry_updated | cut -dT -f1)
 
-    echo "tag:$HOST,$DATE:/$ARTICLE"
+    echo "tag:$HOST,$DATE:/$ENTRY"
   }
 }
 
-function articles_templated()
+function entries_templated()
 {
   TEMPL=$1
 
-  for ARTICLE in $(articles)
+  for ENTRY in $(entries)
   do
-    def_article
+    def_entry
 
     template $TEMPL
   done
@@ -148,31 +148,31 @@ done
 #
 
 # generate article pages
-for ARTICLE in $($REPO/articles)
+for ENTRY in $($REPO/entries)
 do
-  def_article
+  def_entry
 
-  template "article.html" > $DEST/$ARTICLE.html
+  template "entry.html" > $DEST/$ENTRY.html
 done
 
 # generate index page
 if [ ! -z "$INDEX" ]; then
-  def_paper
+  def_feed
 
   function index_entries()
   {
-    articles_templated "index_entry.html"
+    entries_templated "index_entry.html"
   }
   template "index.html" > $DEST/index.html
 fi
 
 # generate atom feed
 if [ ! -z "$FEED" ]; then
-  def_paper
+  def_feed
 
   function feed_entries()
   {
-    articles_templated "feed_entry.xml"
+    entries_templated "feed_entry.xml"
   }
   template "feed.xml" > $DEST/feed.xml
 fi
