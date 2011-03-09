@@ -85,6 +85,10 @@ function def_entry()
   {
     echo $ENTRY
   }
+  function entry_title()
+  {
+    entry_name
+  }
   function entry_author()
   {
     content $REPO/entry/author $ENTRY
@@ -159,7 +163,7 @@ for ENTRY in $(content $REPO/entries)
 do
   def_entry
 
-  template "entry.html" > $DEST/$ENTRY.html
+  template "entry.html" > $DEST/$(entry_name).html
 done
 
 # generate index page

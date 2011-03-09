@@ -1,5 +1,5 @@
 <entry>
-  <title>$(entry_name)</title>
+  <title>$(entry_title)</title>
   <id>$(entry_id)</id>
   <updated>$(entry_updated)</updated>
   <author>
