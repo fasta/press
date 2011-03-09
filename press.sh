@@ -72,7 +72,8 @@ function def_feed()
   function feed_id()
   {
     HOST=$(feed_url | cut -d/ -f3)
-    DATE=$(entries | head -1 | cut -dT -f1)
+    ENTRY=$(entries | head -1)
+    DATE=$(content $REPO/entry/updated | cut -dT -f1)
 
     echo "tag:$HOST,$DATE:/"
   }
