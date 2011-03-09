@@ -103,6 +103,11 @@ function def_entry()
 
     echo "tag:$HOST,$DATE:/$ENTRY"
   }
+
+  PLUGIN=$REPO/entry/plugin
+  if [ -e "$PLUGIN" ]; then
+    . $PLUGIN
+  fi
 }
 
 function entries_templated()
