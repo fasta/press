@@ -72,7 +72,7 @@ function def_feed()
   function feed_id()
   {
     HOST=$(feed_url | cut -d/ -f3)
-    DATE=$(feed_updated | cut -dT -f1)
+    DATE=$(entries | head -1 | cut -dT -f1)
 
     echo "tag:$HOST,$DATE:/"
   }
@@ -149,7 +149,7 @@ done
 #
 
 # generate article pages
-for ENTRY in $($REPO/entries)
+for ENTRY in $(content $REPO/entries)
 do
   def_entry
 
