@@ -21,7 +21,8 @@ FEED="1"
 #
 function template()
 {
-  TEMPLATE=$BASEDIR/default/$1
+  TEMPLATE=$REPO/$1
+  [ ! -e "$TEMPLATE" ] && TEMPLATE=$BASEDIR/default/$1
 
   OLD_IFS=$IFS
   IFS="
