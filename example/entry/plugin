@@ -1,0 +1,5 @@
+function entry_plugin_value()
+{
+  echo "do something with $ENTRY"
+}
+

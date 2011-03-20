@@ -1,0 +1,14 @@
+<entry>
+  <title>$(entry_title)</title>
+  <id>$(entry_id)</id>
+  <updated>$(entry_updated)</updated>
+  <author>
+    <name>$(entry_author)</name>
+  </author>
+  <content type='xhtml'>
+    <div xmlns='http://www.w3.org/1999/xhtml'>
+      $(entry_content)
+    </div>
+  </content>
+</entry>
+
