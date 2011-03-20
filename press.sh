@@ -4,15 +4,11 @@ cd $(dirname $0)
 BASEDIR=$(pwd)
 cd - > /dev/null
 
-REPO=$BASEDIR/example
-DEST=$BASEDIR/tmp
-mkdir -p $DEST
-
 
 # Globals
 #
-#REPO=""
-#DEST=""
+REPO=""
+DEST=""
 INDEX="1"
 FEED="1"
 
